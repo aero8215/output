@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="test" schema="scratch" type="MySQL - 5.7.30-0ubuntu0.18.04.1">
+   <tables>
+      <table catalog="scratch" name="table1" numRows="0" remarks="Tabla de usuarios" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="first_name" nullable="true" remarks="## Nombre del vendedor *it works*" size="100" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="last_name" nullable="true" remarks="Apellido del vendedor\r\n\r\n  1. First item  \r\n\r\n 2. Second item  \r\n 3. Third item  \r\n\r\n [title](https://www.example.com)  `SELECT symbol, bbgid from s` ``` def get_cart(list_name):       list_number = int(list_name.split('_')[-1])       if session.cart:           if list_number in session.cart:               return session.cart[list_number]       else:           session.cart = {}           return {}    ```" size="100" type="VARCHAR" typeCode="12"/>
+      </table>
+      <table catalog="scratch" name="table2" numRows="0" remarks="This is a DB comment about table2" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="field1" nullable="true" remarks="This is the DB comment for field1" size="10" type="INT" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="field2" nullable="true" remarks="This is the DB comment for field2" size="200" type="VARCHAR" typeCode="12"/>
+      </table>
+   </tables>
+</database>

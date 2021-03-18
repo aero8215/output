@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="sakila" schema="sakila" type="MySQL - 5.7.31-log">
+   <tables>
+      <table catalog="sakila" name="actor" numRows="200" remarks="### Table of actors             1. This should a second line" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="actor_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <child catalog="sakila" column="actor_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="actor_info"/>
+            <child catalog="sakila" column="actor_id" foreignKey="fk_film_actor_actor" implied="false" onDeleteCascade="false" table="film_actor"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="first_name" nullable="false" remarks="## Nombre del vendedor *it works*" size="45" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="last_name" nullable="false" remarks="Apellido del vendedor   1. First item    2. Second item    3. Third item    [title](https://www.example.com)  `SELECT symbol, bbgid from s` ``` def get_cart(list_name):       list_number = int(list_name.split('_')[-1])       if session.cart:           if list_number in session.cart:               return session.cart[list_number]       else:           session.cart = {}           return {}    ```" size="45" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="3" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="actor_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="actor_id"/>
+         </index>
+         <index name="idx_actor_last_name" unique="false">
+            <column ascending="true" name="last_name"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="actor_info" numRows="0" remarks="" type="VIEW" viewSql="select `a`.`actor_id` AS `actor_id`,`a`.`first_name` AS `first_name`,`a`.`last_name` AS `last_name`,group_concat(distinct concat(`c`.`name`,': ',(select group_concat(`f`.`title` order by `f`.`title` ASC separator ', ') from ((`sakila`.`film` `f` join `sakila`.`film_category` `fc` on((`f`.`film_id` = `fc`.`film_id`))) join `sakila`.`film_actor` `fa` on((`f`.`film_id` = `fa`.`film_id`))) where ((`fc`.`category_id` = `c`.`category_id`) and (`fa`.`actor_id` = `a`.`actor_id`)))) order by `c`.`name` ASC separator '; ') AS `film_info` from (((`sakila`.`actor` `a` left join `sakila`.`film_actor` `fa` on((`a`.`actor_id` = `fa`.`actor_id`))) left join `sakila`.`film_category` `fc` on((`fa`.`film_id` = `fc`.`film_id`))) left join `sakila`.`category` `c` on((`fc`.`category_id` = `c`.`category_id`))) group by `a`.`actor_id`,`a`.`first_name`,`a`.`last_name`">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="actor_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="actor_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="actor"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="first_name" nullable="false" remarks="" size="45" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="last_name" nullable="false" remarks="" size="45" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="film_info" nullable="true" remarks="" size="65535" type="TEXT" typeCode="-1"/>
+      </table>
+      <table catalog="sakila" name="address" numRows="603" remarks="#### This is the address table comment stored in DB ~~The old comment is crossed out.~~" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="address_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <child catalog="sakila" column="address_id" foreignKey="fk_customer_address" implied="false" onDeleteCascade="false" table="customer"/>
+            <child catalog="sakila" column="address_id" foreignKey="fk_staff_address" implied="false" onDeleteCascade="false" table="staff"/>
+            <child catalog="sakila" column="address_id" foreignKey="fk_store_address" implied="false" onDeleteCascade="false" table="store"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="address" nullable="false" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="address2" nullable="true" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="district" nullable="false" remarks="" size="20" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="city_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="city_id" foreignKey="fk_address_city" implied="false" onDeleteCascade="false" table="city"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="postal_code" nullable="true" remarks="" size="10" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="phone" nullable="false" remarks="" size="20" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="location" nullable="false" remarks="" size="0" type="GEOMETRY" typeCode="-2"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="8" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="address_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="address_id"/>
+         </index>
+         <index name="idx_fk_city_id" unique="false">
+            <column ascending="true" name="city_id"/>
+         </index>
+         <index name="idx_location" unique="false">
+            <column ascending="true" name="location"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="category" numRows="16" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="category_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <child catalog="sakila" column="category_id" foreignKey="fk_film_category_category" implied="false" onDeleteCascade="false" table="film_category"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="false" remarks="" size="25" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="2" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="category_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="category_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="city" numRows="600" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="city_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <child catalog="sakila" column="city_id" foreignKey="fk_address_city" implied="false" onDeleteCascade="false" table="address"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="city" nullable="false" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="country_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="country_id" foreignKey="fk_city_country" implied="false" onDeleteCascade="false" table="country"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="3" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="city_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="city_id"/>
+         </index>
+         <index name="idx_fk_country_id" unique="false">
+            <column ascending="true" name="country_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="country" numRows="109" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="country_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <child catalog="sakila" column="country_id" foreignKey="fk_city_country" implied="false" onDeleteCascade="false" table="city"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="country" nullable="false" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="2" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="country_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="country_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="customer" numRows="599" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="customer_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <child catalog="sakila" column="customer_id" foreignKey="fk_payment_customer" implied="false" onDeleteCascade="false" table="payment"/>
+            <child catalog="sakila" column="customer_id" foreignKey="fk_rental_customer" implied="false" onDeleteCascade="false" table="rental"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="store_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <parent catalog="sakila" column="store_id" foreignKey="fk_customer_store" implied="false" onDeleteCascade="false" table="store"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="first_name" nullable="false" remarks="" size="45" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="last_name" nullable="false" remarks="" size="45" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="email" nullable="true" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="address_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="address_id" foreignKey="fk_customer_address" implied="false" onDeleteCascade="false" table="address"/>
+         </column>
+         <column autoUpdated="false" defaultValue="1" digits="0" id="6" name="active" nullable="false" remarks="" size="0" type="BIT" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="create_date" nullable="false" remarks="" size="19" type="DATETIME" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="8" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="customer_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="customer_id"/>
+         </index>
+         <index name="idx_fk_address_id" unique="false">
+            <column ascending="true" name="address_id"/>
+         </index>
+         <index name="idx_fk_store_id" unique="false">
+            <column ascending="true" name="store_id"/>
+         </index>
+         <index name="idx_last_name" unique="false">
+            <column ascending="true" name="last_name"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="customer_list" numRows="0" remarks="" type="VIEW" viewSql="select `cu`.`customer_id` AS `ID`,concat(`cu`.`first_name`,' ',`cu`.`last_name`) AS `name`,`a`.`address` AS `address`,`a`.`postal_code` AS `zip code`,`a`.`phone` AS `phone`,`sakila`.`city`.`city` AS `city`,`sakila`.`country`.`country` AS `country`,if(`cu`.`active`,'active','') AS `notes`,`cu`.`store_id` AS `SID` from (((`sakila`.`customer` `cu` join `sakila`.`address` `a` on((`cu`.`address_id` = `a`.`address_id`))) join `sakila`.`city` on((`a`.`city_id` = `sakila`.`city`.`city_id`))) join `sakila`.`country` on((`sakila`.`city`.`country_id` = `sakila`.`country`.`country_id`)))">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="ID" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="91" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="address" nullable="false" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="zip code" nullable="true" remarks="" size="10" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="phone" nullable="false" remarks="" size="20" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="city" nullable="false" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="country" nullable="false" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="" digits="0" id="7" name="notes" nullable="false" remarks="" size="6" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="SID" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6"/>
+      </table>
+      <table catalog="sakila" name="film" numRows="1000" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="film_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <child catalog="sakila" column="film_id" foreignKey="fk_film_actor_film" implied="false" onDeleteCascade="false" table="film_actor"/>
+            <child catalog="sakila" column="film_id" foreignKey="fk_film_category_film" implied="false" onDeleteCascade="false" table="film_category"/>
+            <child catalog="sakila" column="film_id" foreignKey="fk_inventory_film" implied="false" onDeleteCascade="false" table="inventory"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="title" nullable="false" remarks="" size="128" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="description" nullable="true" remarks="" size="65535" type="TEXT" typeCode="-1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="release_year" nullable="true" remarks="" size="0" type="YEAR" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="language_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <parent catalog="sakila" column="language_id" foreignKey="fk_film_language" implied="false" onDeleteCascade="false" table="language"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="original_language_id" nullable="true" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <parent catalog="sakila" column="language_id" foreignKey="fk_film_language_original" implied="false" onDeleteCascade="false" table="language"/>
+         </column>
+         <column autoUpdated="false" defaultValue="3" digits="0" id="6" name="rental_duration" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6"/>
+         <column autoUpdated="false" defaultValue="4.99" digits="2" id="7" name="rental_rate" nullable="false" remarks="" size="4" type="DECIMAL" typeCode="3"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="length" nullable="true" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="19.99" digits="2" id="9" name="replacement_cost" nullable="false" remarks="" size="5" type="DECIMAL" typeCode="3"/>
+         <column autoUpdated="false" defaultValue="G" digits="0" id="10" name="rating" nullable="true" remarks="" size="5" type="enum('G', 'PG', 'PG-13', 'R', 'NC-17')" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="special_features" nullable="true" remarks="" size="54" type="set('Trailers', 'Commentaries', 'Deleted Scenes', 'Behind the Scenes')" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="12" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="film_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="film_id"/>
+         </index>
+         <index name="idx_fk_language_id" unique="false">
+            <column ascending="true" name="language_id"/>
+         </index>
+         <index name="idx_fk_original_language_id" unique="false">
+            <column ascending="true" name="original_language_id"/>
+         </index>
+         <index name="idx_title" unique="false">
+            <column ascending="true" name="title"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="film_actor" numRows="5462" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="actor_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="actor_id" foreignKey="fk_film_actor_actor" implied="false" onDeleteCascade="false" table="actor"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="film_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="film_id" foreignKey="fk_film_actor_film" implied="false" onDeleteCascade="false" table="film"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="2" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="actor_id" sequenceNumberInPK="1"/>
+         <primaryKey column="film_id" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="actor_id"/>
+            <column ascending="true" name="film_id"/>
+         </index>
+         <index name="idx_fk_film_id" unique="false">
+            <column ascending="true" name="film_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="film_category" numRows="1000" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="film_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="film_id" foreignKey="fk_film_category_film" implied="false" onDeleteCascade="false" table="film"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="category_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <parent catalog="sakila" column="category_id" foreignKey="fk_film_category_category" implied="false" onDeleteCascade="false" table="category"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="2" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="category_id" sequenceNumberInPK="1"/>
+         <primaryKey column="film_id" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="film_id"/>
+            <column ascending="true" name="category_id"/>
+         </index>
+         <index name="fk_film_category_category" unique="false">
+            <column ascending="true" name="category_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="film_list" numRows="0" remarks="" type="VIEW" viewSql="select `sakila`.`film`.`film_id` AS `FID`,`sakila`.`film`.`title` AS `title`,`sakila`.`film`.`description` AS `description`,`sakila`.`category`.`name` AS `category`,`sakila`.`film`.`rental_rate` AS `price`,`sakila`.`film`.`length` AS `length`,`sakila`.`film`.`rating` AS `rating`,group_concat(concat(`sakila`.`actor`.`first_name`,' ',`sakila`.`actor`.`last_name`) separator ', ') AS `actors` from ((((`sakila`.`category` left join `sakila`.`film_category` on((`sakila`.`category`.`category_id` = `sakila`.`film_category`.`category_id`))) left join `sakila`.`film` on((`sakila`.`film_category`.`film_id` = `sakila`.`film`.`film_id`))) join `sakila`.`film_actor` on((`sakila`.`film`.`film_id` = `sakila`.`film_actor`.`film_id`))) join `sakila`.`actor` on((`sakila`.`film_actor`.`actor_id` = `sakila`.`actor`.`actor_id`))) group by `sakila`.`film`.`film_id`,`sakila`.`category`.`name`">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="FID" nullable="true" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="title" nullable="true" remarks="" size="128" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="description" nullable="true" remarks="" size="65535" type="TEXT" typeCode="-1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="category" nullable="false" remarks="" size="25" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="4.99" digits="2" id="4" name="price" nullable="true" remarks="" size="4" type="DECIMAL" typeCode="3"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="length" nullable="true" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="G" digits="0" id="6" name="rating" nullable="true" remarks="" size="5" type="enum('G', 'PG', 'PG-13', 'R', 'NC-17')" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="actors" nullable="true" remarks="" size="65535" type="TEXT" typeCode="-1"/>
+      </table>
+      <table catalog="sakila" name="film_text" numRows="1000" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="film_id" nullable="false" remarks="" size="5" type="SMALLINT" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="title" nullable="false" remarks="" size="255" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="description" nullable="true" remarks="" size="65535" type="TEXT" typeCode="-1"/>
+         <primaryKey column="film_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="film_id"/>
+         </index>
+         <index name="idx_title_description" unique="false">
+            <column ascending="true" name="title"/>
+            <column ascending="true" name="description"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="inventory" numRows="4581" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="inventory_id" nullable="false" remarks="" size="8" type="MEDIUMINT UNSIGNED" typeCode="4">
+            <child catalog="sakila" column="inventory_id" foreignKey="fk_rental_inventory" implied="false" onDeleteCascade="false" table="rental"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="film_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="film_id" foreignKey="fk_inventory_film" implied="false" onDeleteCascade="false" table="film"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="store_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <parent catalog="sakila" column="store_id" foreignKey="fk_inventory_store" implied="false" onDeleteCascade="false" table="store"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="3" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="inventory_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="inventory_id"/>
+         </index>
+         <index name="idx_fk_film_id" unique="false">
+            <column ascending="true" name="film_id"/>
+         </index>
+         <index name="idx_store_id_film_id" unique="false">
+            <column ascending="true" name="store_id"/>
+            <column ascending="true" name="film_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="language" numRows="6" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="language_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <child catalog="sakila" column="language_id" foreignKey="fk_film_language" implied="false" onDeleteCascade="false" table="film"/>
+            <child catalog="sakila" column="original_language_id" foreignKey="fk_film_language_original" implied="false" onDeleteCascade="false" table="film"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="false" remarks="" size="20" type="CHAR" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="2" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="language_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="language_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="nicer_but_slower_film_list" numRows="0" remarks="" type="VIEW" viewSql="select `sakila`.`film`.`film_id` AS `FID`,`sakila`.`film`.`title` AS `title`,`sakila`.`film`.`description` AS `description`,`sakila`.`category`.`name` AS `category`,`sakila`.`film`.`rental_rate` AS `price`,`sakila`.`film`.`length` AS `length`,`sakila`.`film`.`rating` AS `rating`,group_concat(concat(concat(upper(substr(`sakila`.`actor`.`first_name`,1,1)),lower(substr(`sakila`.`actor`.`first_name`,2,length(`sakila`.`actor`.`first_name`))),' ',concat(upper(substr(`sakila`.`actor`.`last_name`,1,1)),lower(substr(`sakila`.`actor`.`last_name`,2,length(`sakila`.`actor`.`last_name`)))))) separator ', ') AS `actors` from ((((`sakila`.`category` left join `sakila`.`film_category` on((`sakila`.`category`.`category_id` = `sakila`.`film_category`.`category_id`))) left join `sakila`.`film` on((`sakila`.`film_category`.`film_id` = `sakila`.`film`.`film_id`))) join `sakila`.`film_actor` on((`sakila`.`film`.`film_id` = `sakila`.`film_actor`.`film_id`))) join `sakila`.`actor` on((`sakila`.`film_actor`.`actor_id` = `sakila`.`actor`.`actor_id`))) group by `sakila`.`film`.`film_id`,`sakila`.`category`.`name`">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="FID" nullable="true" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="title" nullable="true" remarks="" size="128" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="description" nullable="true" remarks="" size="65535" type="TEXT" typeCode="-1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="category" nullable="false" remarks="" size="25" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="4.99" digits="2" id="4" name="price" nullable="true" remarks="" size="4" type="DECIMAL" typeCode="3"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="length" nullable="true" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="G" digits="0" id="6" name="rating" nullable="true" remarks="" size="5" type="enum('G', 'PG', 'PG-13', 'R', 'NC-17')" typeCode="1"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="actors" nullable="true" remarks="" size="65535" type="TEXT" typeCode="-1"/>
+      </table>
+      <table catalog="sakila" name="payment" numRows="16086" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="payment_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="customer_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="customer_id" foreignKey="fk_payment_customer" implied="false" onDeleteCascade="false" table="customer"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="staff_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <parent catalog="sakila" column="staff_id" foreignKey="fk_payment_staff" implied="false" onDeleteCascade="false" table="staff"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="rental_id" nullable="true" remarks="" size="10" type="INT" typeCode="4">
+            <parent catalog="sakila" column="rental_id" foreignKey="fk_payment_rental" implied="false" onDeleteCascade="false" table="rental"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="2" id="4" name="amount" nullable="false" remarks="" size="5" type="DECIMAL" typeCode="3"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="payment_date" nullable="false" remarks="" size="19" type="DATETIME" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="6" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="payment_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="payment_id"/>
+         </index>
+         <index name="fk_payment_rental" unique="false">
+            <column ascending="true" name="rental_id"/>
+         </index>
+         <index name="idx_fk_customer_id" unique="false">
+            <column ascending="true" name="customer_id"/>
+         </index>
+         <index name="idx_fk_staff_id" unique="false">
+            <column ascending="true" name="staff_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="rental" numRows="16005" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="rental_id" nullable="false" remarks="" size="10" type="INT" typeCode="4">
+            <child catalog="sakila" column="rental_id" foreignKey="fk_payment_rental" implied="false" onDeleteCascade="false" table="payment"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="rental_date" nullable="false" remarks="" size="19" type="DATETIME" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="inventory_id" nullable="false" remarks="" size="8" type="MEDIUMINT UNSIGNED" typeCode="4">
+            <parent catalog="sakila" column="inventory_id" foreignKey="fk_rental_inventory" implied="false" onDeleteCascade="false" table="inventory"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="customer_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="customer_id" foreignKey="fk_rental_customer" implied="false" onDeleteCascade="false" table="customer"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="return_date" nullable="true" remarks="" size="19" type="DATETIME" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="staff_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <parent catalog="sakila" column="staff_id" foreignKey="fk_rental_staff" implied="false" onDeleteCascade="false" table="staff"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="6" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="rental_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="rental_id"/>
+         </index>
+         <index name="idx_fk_customer_id" unique="false">
+            <column ascending="true" name="customer_id"/>
+         </index>
+         <index name="idx_fk_inventory_id" unique="false">
+            <column ascending="true" name="inventory_id"/>
+         </index>
+         <index name="idx_fk_staff_id" unique="false">
+            <column ascending="true" name="staff_id"/>
+         </index>
+         <index name="rental_date" unique="true">
+            <column ascending="true" name="rental_date"/>
+            <column ascending="true" name="inventory_id"/>
+            <column ascending="true" name="customer_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="sales_by_film_category" numRows="0" remarks="" type="VIEW" viewSql="select `c`.`name` AS `category`,sum(`p`.`amount`) AS `total_sales` from (((((`sakila`.`payment` `p` join `sakila`.`rental` `r` on((`p`.`rental_id` = `r`.`rental_id`))) join `sakila`.`inventory` `i` on((`r`.`inventory_id` = `i`.`inventory_id`))) join `sakila`.`film` `f` on((`i`.`film_id` = `f`.`film_id`))) join `sakila`.`film_category` `fc` on((`f`.`film_id` = `fc`.`film_id`))) join `sakila`.`category` `c` on((`fc`.`category_id` = `c`.`category_id`))) group by `c`.`name` order by `total_sales` desc">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="category" nullable="false" remarks="" size="25" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="2" id="1" name="total_sales" nullable="true" remarks="" size="27" type="DECIMAL" typeCode="3"/>
+      </table>
+      <table catalog="sakila" name="sales_by_store" numRows="0" remarks="" type="VIEW" viewSql="select concat(`c`.`city`,',',`cy`.`country`) AS `store`,concat(`m`.`first_name`,' ',`m`.`last_name`) AS `manager`,sum(`p`.`amount`) AS `total_sales` from (((((((`sakila`.`payment` `p` join `sakila`.`rental` `r` on((`p`.`rental_id` = `r`.`rental_id`))) join `sakila`.`inventory` `i` on((`r`.`inventory_id` = `i`.`inventory_id`))) join `sakila`.`store` `s` on((`i`.`store_id` = `s`.`store_id`))) join `sakila`.`address` `a` on((`s`.`address_id` = `a`.`address_id`))) join `sakila`.`city` `c` on((`a`.`city_id` = `c`.`city_id`))) join `sakila`.`country` `cy` on((`c`.`country_id` = `cy`.`country_id`))) join `sakila`.`staff` `m` on((`s`.`manager_staff_id` = `m`.`staff_id`))) group by `s`.`store_id` order by `cy`.`country`,`c`.`city`">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="store" nullable="true" remarks="" size="101" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="manager" nullable="true" remarks="" size="91" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="2" id="2" name="total_sales" nullable="true" remarks="" size="27" type="DECIMAL" typeCode="3"/>
+      </table>
+      <table catalog="sakila" name="staff" numRows="2" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="staff_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <child catalog="sakila" column="staff_id" foreignKey="fk_payment_staff" implied="false" onDeleteCascade="false" table="payment"/>
+            <child catalog="sakila" column="staff_id" foreignKey="fk_rental_staff" implied="false" onDeleteCascade="false" table="rental"/>
+            <child catalog="sakila" column="manager_staff_id" foreignKey="fk_store_staff" implied="false" onDeleteCascade="false" table="store"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="first_name" nullable="false" remarks="" size="45" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="last_name" nullable="false" remarks="" size="45" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="address_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="address_id" foreignKey="fk_staff_address" implied="false" onDeleteCascade="false" table="address"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="picture" nullable="true" remarks="" size="65535" type="BLOB" typeCode="-4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="email" nullable="true" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="store_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <parent catalog="sakila" column="store_id" foreignKey="fk_staff_store" implied="false" onDeleteCascade="false" table="store"/>
+         </column>
+         <column autoUpdated="false" defaultValue="1" digits="0" id="7" name="active" nullable="false" remarks="" size="0" type="BIT" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="username" nullable="false" remarks="" size="16" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="password" nullable="true" remarks="" size="40" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="10" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="staff_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="staff_id"/>
+         </index>
+         <index name="idx_fk_address_id" unique="false">
+            <column ascending="true" name="address_id"/>
+         </index>
+         <index name="idx_fk_store_id" unique="false">
+            <column ascending="true" name="store_id"/>
+         </index>
+      </table>
+      <table catalog="sakila" name="staff_list" numRows="0" remarks="" type="VIEW" viewSql="select `s`.`staff_id` AS `ID`,concat(`s`.`first_name`,' ',`s`.`last_name`) AS `name`,`a`.`address` AS `address`,`a`.`postal_code` AS `zip code`,`a`.`phone` AS `phone`,`sakila`.`city`.`city` AS `city`,`sakila`.`country`.`country` AS `country`,`s`.`store_id` AS `SID` from (((`sakila`.`staff` `s` join `sakila`.`address` `a` on((`s`.`address_id` = `a`.`address_id`))) join `sakila`.`city` on((`a`.`city_id` = `sakila`.`city`.`city_id`))) join `sakila`.`country` on((`sakila`.`city`.`country_id` = `sakila`.`country`.`country_id`)))">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="ID" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="true" remarks="" size="91" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="address" nullable="false" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="zip code" nullable="true" remarks="" size="10" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="phone" nullable="false" remarks="" size="20" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="city" nullable="false" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="country" nullable="false" remarks="" size="50" type="VARCHAR" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="SID" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6"/>
+      </table>
+      <table catalog="sakila" name="store" numRows="2" remarks="" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="store_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <child catalog="sakila" column="store_id" foreignKey="fk_customer_store" implied="false" onDeleteCascade="false" table="customer"/>
+            <child catalog="sakila" column="store_id" foreignKey="fk_inventory_store" implied="false" onDeleteCascade="false" table="inventory"/>
+            <child catalog="sakila" column="store_id" foreignKey="fk_staff_store" implied="false" onDeleteCascade="false" table="staff"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="manager_staff_id" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED" typeCode="-6">
+            <parent catalog="sakila" column="staff_id" foreignKey="fk_store_staff" implied="false" onDeleteCascade="false" table="staff"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="address_id" nullable="false" remarks="" size="5" type="SMALLINT UNSIGNED" typeCode="5">
+            <parent catalog="sakila" column="address_id" foreignKey="fk_store_address" implied="false" onDeleteCascade="false" table="address"/>
+         </column>
+         <column autoUpdated="false" defaultValue="CURRENT_TIMESTAMP" digits="0" id="3" name="last_update" nullable="false" remarks="" size="19" type="TIMESTAMP" typeCode="93"/>
+         <primaryKey column="store_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="store_id"/>
+         </index>
+         <index name="idx_fk_address_id" unique="false">
+            <column ascending="true" name="address_id"/>
+         </index>
+         <index name="idx_unique_manager" unique="true">
+            <column ascending="true" name="manager_staff_id"/>
+         </index>
+      </table>
+   </tables>
+   <routines>
+      <routine dataAccess="READS SQL DATA" deterministic="false" name="film_in_stock" securityType="DEFINER" type="PROCEDURE">
+         <comment/>
+         <definition language="SQL"><![CDATA[BEGIN
+     SELECT inventory_id
+     FROM inventory
+     WHERE film_id = p_film_id
+     AND store_id = p_store_id
+     AND inventory_in_stock(inventory_id);
+
+     SELECT COUNT(*)
+     FROM inventory
+     WHERE film_id = p_film_id
+     AND store_id = p_store_id
+     AND inventory_in_stock(inventory_id)
+     INTO p_film_count;
+END]]></definition>
+      </routine>
+      <routine dataAccess="READS SQL DATA" deterministic="false" name="film_not_in_stock" securityType="DEFINER" type="PROCEDURE">
+         <comment/>
+         <definition language="SQL"><![CDATA[BEGIN
+     SELECT inventory_id
+     FROM inventory
+     WHERE film_id = p_film_id
+     AND store_id = p_store_id
+     AND NOT inventory_in_stock(inventory_id);
+
+     SELECT COUNT(*)
+     FROM inventory
+     WHERE film_id = p_film_id
+     AND store_id = p_store_id
+     AND NOT inventory_in_stock(inventory_id)
+     INTO p_film_count;
+END]]></definition>
+      </routine>
+      <routine dataAccess="READS SQL DATA" deterministic="true" name="get_customer_balance" returnType="decimal(5,2)" securityType="DEFINER" type="FUNCTION">
+         <comment/>
+         <definition language="SQL"><![CDATA[BEGIN
+
+       #OK, WE NEED TO CALCULATE THE CURRENT BALANCE GIVEN A CUSTOMER_ID AND A DATE
+       #THAT WE WANT THE BALANCE TO BE EFFECTIVE FOR. THE BALANCE IS:
+       #   1) RENTAL FEES FOR ALL PREVIOUS RENTALS
+       #   2) ONE DOLLAR FOR EVERY DAY THE PREVIOUS RENTALS ARE OVERDUE
+       #   3) IF A FILM IS MORE THAN RENTAL_DURATION * 2 OVERDUE, CHARGE THE REPLACEMENT_COST
+       #   4) SUBTRACT ALL PAYMENTS MADE BEFORE THE DATE SPECIFIED
+
+  DECLARE v_rentfees DECIMAL(5,2); #FEES PAID TO RENT THE VIDEOS INITIALLY
+  DECLARE v_overfees INTEGER;      #LATE FEES FOR PRIOR RENTALS
+  DECLARE v_payments DECIMAL(5,2); #SUM OF PAYMENTS MADE PREVIOUSLY
+
+  SELECT IFNULL(SUM(film.rental_rate),0) INTO v_rentfees
+    FROM film, inventory, rental
+    WHERE film.film_id = inventory.film_id
+      AND inventory.inventory_id = rental.inventory_id
+      AND rental.rental_date <= p_effective_date
+      AND rental.customer_id = p_customer_id;
+
+  SELECT IFNULL(SUM(IF((TO_DAYS(rental.return_date) - TO_DAYS(rental.rental_date)) > film.rental_duration,
+        ((TO_DAYS(rental.return_date) - TO_DAYS(rental.rental_date)) - film.rental_duration),0)),0) INTO v_overfees
+    FROM rental, inventory, film
+    WHERE film.film_id = inventory.film_id
+      AND inventory.inventory_id = rental.inventory_id
+      AND rental.rental_date <= p_effective_date
+      AND rental.customer_id = p_customer_id;
+
+
+  SELECT IFNULL(SUM(payment.amount),0) INTO v_payments
+    FROM payment
+
+    WHERE payment.payment_date <= p_effective_date
+    AND payment.customer_id = p_customer_id;
+
+  RETURN v_rentfees + v_overfees - v_payments;
+END]]></definition>
+      </routine>
+      <routine dataAccess="READS SQL DATA" deterministic="false" name="inventory_held_by_customer" returnType="int(11)" securityType="DEFINER" type="FUNCTION">
+         <comment/>
+         <definition language="SQL"><![CDATA[BEGIN
+  DECLARE v_customer_id INT;
+  DECLARE EXIT HANDLER FOR NOT FOUND RETURN NULL;
+
+  SELECT customer_id INTO v_customer_id
+  FROM rental
+  WHERE return_date IS NULL
+  AND inventory_id = p_inventory_id;
+
+  RETURN v_customer_id;
+END]]></definition>
+      </routine>
+      <routine dataAccess="READS SQL DATA" deterministic="false" name="inventory_in_stock" returnType="tinyint(1)" securityType="DEFINER" type="FUNCTION">
+         <comment/>
+         <definition language="SQL"><![CDATA[BEGIN
+    DECLARE v_rentals INT;
+    DECLARE v_out     INT;
+
+    #AN ITEM IS IN-STOCK IF THERE ARE EITHER NO ROWS IN THE rental TABLE
+    #FOR THE ITEM OR ALL ROWS HAVE return_date POPULATED
+
+    SELECT COUNT(*) INTO v_rentals
+    FROM rental
+    WHERE inventory_id = p_inventory_id;
+
+    IF v_rentals = 0 THEN
+      RETURN TRUE;
+    END IF;
+
+    SELECT COUNT(rental_id) INTO v_out
+    FROM inventory LEFT JOIN rental USING(inventory_id)
+    WHERE inventory.inventory_id = p_inventory_id
+    AND rental.return_date IS NULL;
+
+    IF v_out > 0 THEN
+      RETURN FALSE;
+    ELSE
+      RETURN TRUE;
+    END IF;
+END]]></definition>
+      </routine>
+      <routine dataAccess="READS SQL DATA" deterministic="false" name="rewards_report" securityType="DEFINER" type="PROCEDURE">
+         <comment><![CDATA[Provides a customizable report on best customers]]></comment>
+         <definition language="SQL"><![CDATA[proc: BEGIN
+
+    DECLARE last_month_start DATE;
+    DECLARE last_month_end DATE;
+
+    /* Some sanity checks... */
+    IF min_monthly_purchases = 0 THEN
+        SELECT 'Minimum monthly purchases parameter must be > 0';
+        LEAVE proc;
+    END IF;
+    IF min_dollar_amount_purchased = 0.00 THEN
+        SELECT 'Minimum monthly dollar amount purchased parameter must be > $0.00';
+        LEAVE proc;
+    END IF;
+
+    /* Determine start and end time periods */
+    SET last_month_start = DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH);
+    SET last_month_start = STR_TO_DATE(CONCAT(YEAR(last_month_start),'-',MONTH(last_month_start),'-01'),'%Y-%m-%d');
+    SET last_month_end = LAST_DAY(last_month_start);
+
+    /*
+        Create a temporary storage area for
+        Customer IDs.
+    */
+    CREATE TEMPORARY TABLE tmpCustomer (customer_id SMALLINT UNSIGNED NOT NULL PRIMARY KEY);
+
+    /*
+        Find all customers meeting the
+        monthly purchase requirements
+    */
+    INSERT INTO tmpCustomer (customer_id)
+    SELECT p.customer_id
+    FROM payment AS p
+    WHERE DATE(p.payment_date) BETWEEN last_month_start AND last_month_end
+    GROUP BY customer_id
+    HAVING SUM(p.amount) > min_dollar_amount_purchased
+    AND COUNT(customer_id) > min_monthly_purchases;
+
+    /* Populate OUT parameter with count of found customers */
+    SELECT COUNT(*) FROM tmpCustomer INTO count_rewardees;
+
+    /*
+        Output ALL customer information of matching rewardees.
+        Customize output as needed.
+    */
+    SELECT c.*
+    FROM tmpCustomer AS t
+    INNER JOIN customer AS c ON t.customer_id = c.customer_id;
+
+    /* Clean up */
+    DROP TABLE tmpCustomer;
+END]]></definition>
+      </routine>
+   </routines>
+</database>

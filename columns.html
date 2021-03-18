@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>sakila Database</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+        <!-- Bootstrap 3.3.5 -->
+        <link rel="stylesheet" href="bower/admin-lte/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="bower/ionicons/css/ionicons.min.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="bower/datatables.net-bs/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="bower/datatables.net-buttons-bs/css/buttons.bootstrap.min.css">
+        <!-- Code Mirror -->
+        <link rel="stylesheet" href="bower/codemirror/codemirror.css">
+        <!-- Fonts -->
+        <link href='fonts/indieflower/indie-flower.css' rel='stylesheet' type='text/css'>
+        <link href='fonts/source-sans-pro/source-sans-pro.css' rel='stylesheet' type='text/css'>
+
+        <!-- Theme style -->
+        <link rel="stylesheet" href="bower/admin-lte/dist/css/AdminLTE.min.css">
+        <!-- Salvattore -->
+        <link rel="stylesheet" href="bower/salvattore/salvattore.css">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+           folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="bower/admin-lte/dist/css/skins/_all-skins.min.css">
+        <!-- SchemaSpy -->
+        <link rel="stylesheet" href="schemaSpy.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="bower/html5shiv/html5shiv.min.js"></script>
+        <script src="bower/respond/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+    <body class="hold-transition skin-blue layout-top-nav">
+        <div class="wrapper">
+            <header class="main-header">
+                <nav class="navbar navbar-static-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a href="index.html" class="navbar-brand"><b>sakila</b> Database</a>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><i class="fa fa-bars"></i></button>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.html">Tables <span class="sr-only">(current)</span></a></li>
+                                <li><a href="columns.html" title="All of the columns in the schema">Columns</a></li>
+                                <li><a href="constraints.html" title="Useful for diagnosing error messages that just give constraint name or number">Constraints</a></li>
+                                <li><a href="relationships.html" title="Diagram of table relationships">Relationships</a></li>
+                                <li><a href="orphans.html" title="View of tables with neither parents nor children">Orphan&nbsp;Tables</a></li>
+                                <li><a href="anomalies.html" title="Things that might not be quite right">Anomalies</a></li>
+                                <li><a href="routines.html" title="Procedures and functions">Routines</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                        <!-- Navbar Right Menu -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </header>
+            <!-- Main content -->
+            <!-- Full Width Column -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>Columns</h1>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            <h3 class="box-title">Columns</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="column_table" class="table table-bordered table-striped dataTable" role="grid">
+                                <thead align='left'>
+                                    <tr>
+                                        <th>Table</th>
+                                        <th>Type</th>
+                                        <th>Column</th>
+                                        <th>Type</th>
+                                        <th>Size</th>
+                                        <th title='Are nulls allowed?'>Nullable</th>
+                                        <th title='Is column automatically updated?'>Auto</th>
+                                        <th title='Default value'>Default</th>
+                                        <th title='Comments' class="toggle"><span>Comments</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <script>
+                    var tableData = [
+    {
+        "tableName": "store",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>address_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "password",
+        "type": "VARCHAR",
+        "length": 40,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "store",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>manager_staff_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "nicer_but_slower_film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "title",
+        "type": "VARCHAR",
+        "length": 128,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>customer_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_actor",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>film_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "address",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "rental",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>staff_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "SID",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "picture",
+        "type": "BLOB",
+        "length": 65535,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ID",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "0",
+        "comments": ""
+    },
+    {
+        "tableName": "address",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "address",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_category",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>category_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "username",
+        "type": "VARCHAR",
+        "length": 16,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "payment",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>staff_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "active",
+        "type": "BIT",
+        "length": 0,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "1",
+        "comments": ""
+    },
+    {
+        "tableName": "film_text",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>title",
+        "type": "VARCHAR",
+        "length": 255,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "sales_by_store",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "store",
+        "type": "VARCHAR",
+        "length": 101,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "city",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "rental_rate",
+        "type": "DECIMAL",
+        "length": 4,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "4.99",
+        "comments": ""
+    },
+    {
+        "tableName": "actor_info",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "first_name",
+        "type": "VARCHAR",
+        "length": 45,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "email",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "rental",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>customer_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "rental",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "return_date",
+        "type": "DATETIME",
+        "length": 19,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "zip code",
+        "type": "VARCHAR",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>language_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "email",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "payment",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>customer_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "first_name",
+        "type": "VARCHAR",
+        "length": 45,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "inventory",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>film_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "rental",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>inventory_id",
+        "type": "MEDIUMINT UNSIGNED",
+        "length": 8,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "name",
+        "type": "VARCHAR",
+        "length": 91,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "address",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "district",
+        "type": "VARCHAR",
+        "length": 20,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_text",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>description",
+        "type": "TEXT",
+        "length": 65535,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "inventory",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>store_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>title",
+        "type": "VARCHAR",
+        "length": 128,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "actors",
+        "type": "TEXT",
+        "length": 65535,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>last_name",
+        "type": "VARCHAR",
+        "length": 45,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "payment",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "amount",
+        "type": "DECIMAL",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>actor_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "nicer_but_slower_film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "description",
+        "type": "TEXT",
+        "length": 65535,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "nicer_but_slower_film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "length",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "first_name",
+        "type": "VARCHAR",
+        "length": 45,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "active",
+        "type": "BIT",
+        "length": 0,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "1",
+        "comments": ""
+    },
+    {
+        "tableName": "film_actor",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>last_name",
+        "type": "VARCHAR",
+        "length": 45,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Apellido del vendedor   1. First item    2. Second item    3. Third item    <a href=\"https://www.example.com\">title<\/a>  <code>SELECT symbol, bbgid from s<\/code> <code>def get_cart(list_name): list_number = int(list_name.split('_')[-1]) if session.cart: if list_number in session.cart: return session.cart[list_number] else: session.cart = {} return {}<\/code><\/p>"
+    },
+    {
+        "tableName": "customer_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "country",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "payment",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>payment_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "description",
+        "type": "TEXT",
+        "length": 65535,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "nicer_but_slower_film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "category",
+        "type": "VARCHAR",
+        "length": 25,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "category",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "country",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>country_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "category",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "name",
+        "type": "VARCHAR",
+        "length": 25,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "address",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "postal_code",
+        "type": "VARCHAR",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "address",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "phone",
+        "type": "VARCHAR",
+        "length": 20,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "sales_by_film_category",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "total_sales",
+        "type": "DECIMAL",
+        "length": 27,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "rating",
+        "type": "enum('G', 'PG', 'PG-13', 'R', 'NC-17')",
+        "length": 5,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "G",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>original_language_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "nicer_but_slower_film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "actors",
+        "type": "TEXT",
+        "length": 65535,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "price",
+        "type": "DECIMAL",
+        "length": 4,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "4.99",
+        "comments": ""
+    },
+    {
+        "tableName": "language",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "name",
+        "type": "CHAR",
+        "length": 20,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>film_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "special_features",
+        "type": "set('Trailers', 'Commentaries', 'Deleted Scenes', 'Behind the Scenes')",
+        "length": 54,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "store",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "sales_by_store",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "manager",
+        "type": "VARCHAR",
+        "length": 91,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "inventory",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>inventory_id",
+        "type": "MEDIUMINT UNSIGNED",
+        "length": 8,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "actor_info",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "film_info",
+        "type": "TEXT",
+        "length": 65535,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "rating",
+        "type": "enum('G', 'PG', 'PG-13', 'R', 'NC-17')",
+        "length": 5,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "G",
+        "comments": ""
+    },
+    {
+        "tableName": "sales_by_store",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "total_sales",
+        "type": "DECIMAL",
+        "length": 27,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "nicer_but_slower_film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "rating",
+        "type": "enum('G', 'PG', 'PG-13', 'R', 'NC-17')",
+        "length": 5,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "G",
+        "comments": ""
+    },
+    {
+        "tableName": "customer_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ID",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "0",
+        "comments": ""
+    },
+    {
+        "tableName": "inventory",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "sales_by_film_category",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "category",
+        "type": "VARCHAR",
+        "length": 25,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>address_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>address_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_category",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "staff_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "country",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "payment",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "address",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>location",
+        "type": "GEOMETRY",
+        "length": 0,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "address",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>address_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "language",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "city",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>country_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_name",
+        "type": "VARCHAR",
+        "length": 45,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "country",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "customer_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "notes",
+        "type": "VARCHAR",
+        "length": 6,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "",
+        "comments": ""
+    },
+    {
+        "tableName": "staff_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "phone",
+        "type": "VARCHAR",
+        "length": 20,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "zip code",
+        "type": "VARCHAR",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "description",
+        "type": "TEXT",
+        "length": 65535,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "address",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>city_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "title",
+        "type": "VARCHAR",
+        "length": 128,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "nicer_but_slower_film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "price",
+        "type": "DECIMAL",
+        "length": 4,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "4.99",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "release_year",
+        "type": "YEAR",
+        "length": 0,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "length",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "first_name",
+        "type": "VARCHAR",
+        "length": 45,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<h2><a href=\"#nombre-del-vendedor-it-works\" id=\"nombre-del-vendedor-it-works\">Nombre del vendedor <em>it works<\/em><\/a><\/h2>"
+    },
+    {
+        "tableName": "film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "FID",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "0",
+        "comments": ""
+    },
+    {
+        "tableName": "nicer_but_slower_film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "FID",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "0",
+        "comments": ""
+    },
+    {
+        "tableName": "city",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "category",
+        "type": "VARCHAR",
+        "length": 25,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "payment",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>rental_id",
+        "type": "INT",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "create_date",
+        "type": "DATETIME",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "actor_info",
+        "tableType": "View",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>actor_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "0",
+        "comments": ""
+    },
+    {
+        "tableName": "rental",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>rental_id",
+        "type": "INT",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_actor",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>actor_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "language",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>language_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "rental",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>rental_date",
+        "type": "DATETIME",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "name",
+        "type": "VARCHAR",
+        "length": 91,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "SID",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "city",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "store",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>store_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>store_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_text",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>film_id",
+        "type": "SMALLINT",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "replacement_cost",
+        "type": "DECIMAL",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "19.99",
+        "comments": ""
+    },
+    {
+        "tableName": "city",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "city",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>staff_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "rental_duration",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "3",
+        "comments": ""
+    },
+    {
+        "tableName": "category",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>category_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_category",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>film_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "phone",
+        "type": "VARCHAR",
+        "length": 20,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "film_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "length",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "payment",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "payment_date",
+        "type": "DATETIME",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "staff",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>store_id",
+        "type": "TINYINT UNSIGNED",
+        "length": 3,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "country",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "country",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "staff_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "address",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "address",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "address2",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "rental",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_update",
+        "type": "TIMESTAMP",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "CURRENT_TIMESTAMP",
+        "comments": ""
+    },
+    {
+        "tableName": "actor_info",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "last_name",
+        "type": "VARCHAR",
+        "length": 45,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "customer_list",
+        "tableType": "View",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "address",
+        "type": "VARCHAR",
+        "length": 50,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": ""
+    },
+    {
+        "tableName": "city",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>city_id",
+        "type": "SMALLINT UNSIGNED",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "null",
+        "comments": ""
+    }
+];
+                    var config = {
+                        pagination: true
+                    };
+                </script>
+            </div>
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <div>
+                    <div class="pull-right hidden-xs">
+                        <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
+                        <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
+                    </div>
+                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.1.0</a></strong>
+                </div>
+                <!-- /.container -->
+            </footer>
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery 2.2.3 -->
+        <script src="bower/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="bower/admin-lte/plugins/jQueryUI/jquery-ui.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="bower/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="bower/datatables.net/jquery.dataTables.min.js"></script>
+        <script src="bower/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="bower/datatables.net-buttons/dataTables.buttons.min.js"></script>
+        <script src="bower/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.html5.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.print.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.colVis.min.js"></script>
+        <!-- SheetJS -->
+        <script src="bower/js-xlsx/xlsx.full.min.js"></script>
+        <!-- pdfmake -->
+        <script src="bower/pdfmake/pdfmake.min.js"></script>
+        <script src="bower/pdfmake/vfs_fonts.js"></script>
+        <!-- SlimScroll -->
+        <script src="bower/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="bower/admin-lte/plugins/fastclick/fastclick.js"></script>
+        <!-- Salvattore -->
+        <script src="bower/salvattore/salvattore.min.js"></script>
+        <!-- AnchorJS -->
+        <script src="bower/anchor-js/anchor.min.js"></script>
+        <!-- CodeMirror -->
+        <script src="bower/codemirror/codemirror.js"></script>
+        <script src="bower/codemirror/sql.js"></script>
+        <!-- AdminLTE App -->
+        <script src="bower/admin-lte/dist/js/app.min.js"></script>
+        <script src="column.js"></script>
+        <script src="schemaSpy.js"></script>
+    </body>
+</html>

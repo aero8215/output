@@ -1,0 +1,30 @@
+<schemaMeta xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://schemaspy.org/xsd/6/schemameta.xsd" >
+    <comments>Database comment</comments>
+    <tables>
+        <table name="table1" comments="Tabla de usuarios">
+            <column name="first_name" comments="## Nombre del vendedor
+*it works*  
+"/>
+<column name="last_name" comments="Apellido del vendedor\r\n\r\n  1. First item  \r\n\r\n
+2. Second item  \r\n
+3. Third item  \r\n\r\n
+[title](https://www.example.com)
+
+`SELECT symbol, bbgid from s`
+```
+def get_cart(list_name):  
+    list_number = int(list_name.split('_')[-1])  
+    if session.cart:  
+        if list_number in session.cart:  
+            return session.cart[list_number]  
+    else:  
+        session.cart = {}  
+        return {}  
+
+```
+
+
+"/>
+        </table>
+    </tables>
+</schemaMeta>
